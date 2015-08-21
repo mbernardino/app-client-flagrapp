@@ -1,47 +1,143 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-                <a href="camera.html">Open Camera</a>
+<head>
+  <title>Capture Photo</title>
+
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" charset="utf-8" src="js/cam.js"></script>
+  </head>
+  <body>
+
+    <div class="navbar-fixed">
+    <nav class="blue darken-2">
+        <a href="#" class="brand-logo center"><b>FLAGRA</b>pp</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#!">Sair</a></li>
+          <!--<li><a href="#!">Second Sidebar Link</a></li>-->
+        </ul>
+        <ul id="slide-out" class="side-nav">
+          <li><a href="#!">Sair</a></li>
+          <!--<li><a href="#!">Second Sidebar Link</a></li>-->
+        </ul>
+        <a href="#" data-activates="slide-out" 
+           class="waves-effect waves-light button-collapse">
+            <i class="mdi-navigation-menu"></i>
+        </a>
+    </nav>
+    </div>
+
+
+    <!-- BODY LIST -->
+    <div class="center-align" id="body-list">
+
+      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="waves-effect waves-light btn-floating btn-large red" onclick="capturePhoto();">
+          <i class="large material-icons">add</i>
+        </a>
+        <!--<ul>
+          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></i></a></li>
+          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+          <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        </ul>-->
+      </div>
+
+        <!--<button onclick="capturePhoto();">Capture Photo</button> <br>
+        <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
+        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+        <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+        <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+        <img style="display:none;" id="largeImage" src="" />-->
+
+        <div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src="http://materializecss.com/images/sample-1.jpg">
+              <span class="card-title">#TipoFlagra</span>
             </div>
+            <!--<div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>-->
+          </div>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+        </div>
+
+        <div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src="http://materializecss.com/images/sample-1.jpg">
+              <span class="card-title">#TipoFlagra</span>
+            </div>
+            <!--<div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>-->
+          </div>
+        </div>
+        </div>
+  </div>
+  
+  <!-- BODY LIST -->
+  <div calss="center-align" id="body-photo" style="display:none;">
+    <div class="row">
+      <div class="col s12 m7">
+        <div class="card large">
+          <div class="card-image">
+            <img src="" id="smallImage">
+          </div>
+          <div>
+            <div class="input-field col s12" style="z-index:9999px;">
+              <select>
+                <option value="" disabled selected>Tipo do Flagra</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-action">
+              <a class="waves-effect waves-light btn" id="btnCancelPhoto">Cancelar</a>
+              <a class="waves-effect waves-light btn" id="btnPostPhoto">Postar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+  <script src="js/materialize.js"></script>
+
+  <script type="text/javascript">
+    $(".button-collapse").sideNav();
+    $(document).ready(function(){
+      $('select').material_select();
+
+      $("#btnCancelPhoto").click(function(){
+        changeDisplays("list");
+      });
+
+      $("#btnPostPhoto").click(function(){
+        Materialize.toast("Vou implementar esta function", 4000);
+      });
+    });
+  </script>
+
+</body>
 </html>
