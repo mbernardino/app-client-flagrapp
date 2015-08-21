@@ -1,52 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Capture Photo</title>
+  <title>FLAGRApp</title>
 
   <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-  <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script type="text/javascript" charset="utf-8" src="js/cam.js"></script>
-  </head>
-  <body>
-
-    <div class="navbar-fixed">
+</head>
+<body>
+  
+  <!--********************************************** NAV MENU **********************************************-->
+  <div class="navbar-fixed">
     <nav class="blue darken-2">
-        <a href="#" class="brand-logo center"><b>FLAGRA</b>pp</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="#!">Sair</a></li>
-          <!--<li><a href="#!">Second Sidebar Link</a></li>-->
-        </ul>
-        <ul id="slide-out" class="side-nav">
-          <li><a href="#!">Sair</a></li>
-          <!--<li><a href="#!">Second Sidebar Link</a></li>-->
-        </ul>
-        <a href="#" data-activates="slide-out" 
-           class="waves-effect waves-light button-collapse">
-            <i class="mdi-navigation-menu"></i>
-        </a>
-    </nav>
-    </div>
+      <a href="#" class="brand-logo center"><b>FLAGRA</b>pp</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#!">Sair</a></li>
+        <!--<li><a href="#!">Second Sidebar Link</a></li>-->
+      </ul>
+      <ul id="slide-out" class="side-nav">
+        <li><a href="#!">Sair</a></li>
+        <!--<li><a href="#!">Second Sidebar Link</a></li>-->
+      </ul>
+      <a href="#" data-activates="slide-out" 
+      class="waves-effect waves-light button-collapse">
+      <i class="mdi-navigation-menu"></i>
+    </a>
+  </nav>
+</div>
+<!--********************************************** NAV MENU **********************************************-->
 
-
-    <!-- BODY LIST -->
-    <div class="center-align" id="body-list">
-
-      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="waves-effect waves-light btn-floating btn-large red" onclick="capturePhoto();">
-          <i class="large material-icons">add</i>
-        </a>
-        <!--<ul>
-          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></i></a></li>
-          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-          <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>-->
-      </div>
+<!--********************************************** BODY LIST **********************************************-->
+<div class="center-align" id="body-list">
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+          <a class="waves-effect waves-light btn-floating btn-large red" onclick="capturePhoto();">
+            <i class="large material-icons">add</i>
+          </a>
+        </div>
 
         <!--<button onclick="capturePhoto();">Capture Photo</button> <br>
         <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
@@ -54,90 +46,68 @@
         <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
         <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
         <img style="display:none;" id="largeImage" src="" />-->
-
-        <div class="row">
+      
+      <!-- CardExample -->
+      <div class="row">
         <div class="col s12 m7">
           <div class="card">
             <div class="card-image">
-              <img src="http://materializecss.com/images/sample-1.jpg">
+              <img src="http://materializecss.com/images/sample-1.jpg" style="width:100%; height:auto;">
               <span class="card-title">#TipoFlagra</span>
             </div>
-            <!--<div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>-->
-          </div>
-        </div>
-        </div>
-
-        <div class="row">
-        <div class="col s12 m7">
-          <div class="card">
-            <div class="card-image">
-              <img src="http://materializecss.com/images/sample-1.jpg">
-              <span class="card-title">#TipoFlagra</span>
-            </div>
-            <!--<div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>-->
-          </div>
-        </div>
-        </div>
-  </div>
-  
-  <!-- BODY LIST -->
-  <div calss="center-align" id="body-photo" style="display:none;">
-    <div class="row">
-      <div class="col s12 m7">
-        <div class="card large">
-          <div class="card-image">
-            <img src="" id="smallImage">
-          </div>
-          <div>
-            <div class="input-field col s12" style="z-index:9999px;">
-              <select>
-                <option value="" disabled selected>Tipo do Flagra</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-            </div>
-          </div>
-          <div class="card-action">
-              <a class="waves-effect waves-light btn" id="btnCancelPhoto">Cancelar</a>
-              <a class="waves-effect waves-light btn" id="btnPostPhoto">Postar</a>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+</div>
+<!--********************************************** BODY LIST **********************************************-->
+
+<!--********************************************** BODY PHOTO **********************************************-->
+<div calss="center-align" id="body-photo" style="display:none;">
+      <div class="row">
+        <div class="col s12 m7">
+          <div class="card large">
+            <div class="card-image">
+              <img src="" id="smallImage">
+            </div>
+            <div>
+              <div class="input-field col s12" style="z-index:9999px;">
+                <select>
+                  <option value="" disabled selected>Tipo do Flagra</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn" id="btnCancelPhoto">Cancelar</a>
+              <a class="waves-effect waves-light btn" id="btnPostPhoto">Postar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<!--********************************************** BODY PHOTO **********************************************-->
+
+<!--********************************************** PRE LOADER **********************************************-->
+<div calss="center-align" id="body-loader" style="display:none;">
+      <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-red">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+      </div>
+</div>
+<!--********************************************** PRE LOADER **********************************************-->
 
     <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-  <script src="js/materialize.js"></script>
-
-  <script type="text/javascript">
-    $(".button-collapse").sideNav();
-    $(document).ready(function(){
-      $('select').material_select();
-
-      $("#btnCancelPhoto").click(function(){
-        changeDisplays("list");
-      });
-
-      $("#btnPostPhoto").click(function(){
-        Materialize.toast("Vou implementar esta function", 4000);
-      });
-    });
-  </script>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/cam.js"></script>
 </body>
 </html>

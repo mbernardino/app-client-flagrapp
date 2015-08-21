@@ -10,6 +10,14 @@
     function onDeviceReady() {
       pictureSource=navigator.camera.PictureSourceType;
       destinationType=navigator.camera.DestinationType;
+
+      $(".button-collapse").sideNav();
+      $('select').material_select();
+      $("#btnCancelPhoto").click(function(){changeDisplays("list");});
+      $("#btnPostPhoto").click(function(){
+        Materialize.toast("Vou implementar esta function", 4000);
+      });
+      setRecentsList();
     }
 
     // Called when a photo is successfully retrieved
@@ -78,20 +86,70 @@
     function changeDisplays(type) {
       switch(type) {
         case "list":
-          $("#body-photo").css("display","none");
-          $("#body-list").css("display","block");
+        $("#body-loader").css("display","none");
+        $("#body-photo").css("display","none");
+        $("#body-list").css("display","block");
         break;
         case "photo":
-          $("#body-list").css("display","none");
-          $("#body-photo").css("display","block");
+        $("#body-loader").css("display","none");
+        $("#body-list").css("display","none");
+        $("#body-photo").css("display","block");
+        break;
+        case "loader":
+        $("#body-loader").css("display","block");
+        $("#body-list").css("display","none");
+        $("#body-photo").css("display","none");
         break;
       }
     }
 
     function setImageIntoForm(imageData) {
       var smallImage = document.getElementById('smallImage');
-      // Show the captured photo
-      // The in-line CSS rules are used to resize the image
-      //
       smallImage.src = "data:image/jpeg;base64," + imageData;
     }
+
+    function setRecentsList() {
+      alert('here');
+        $.ajax({url: "https://flagrapp-server.herokuapp.com/api/recents",
+          dataType: "json",
+          async: true,
+          beforeSend:function(){changeDisplays('loader')},
+          complete:function(){changeDisplays('list')},
+          success: function (response) {
+            $.each(response.message, function(key, value){
+                var card = $("<div class=\"row\">"+
+                             "<div class=\"col s12 m7\">"+
+                             "<div class=\"card\">"+
+                             "<div class=\"card-image\">"+
+                             "<img src=\""+value.media+"\" style=\"width:100%; height:auto;\">"+
+                             "<span class=\"card-title\">#"+value.text+"</span>"+
+                             "</div></div></div></div>");
+                $("#body-list").append(card);
+            });
+          },
+          error: function (request, error) {
+            onFail('Network issue'+ error);
+          }
+        });
+    }
+
+    function postPic() {
+      //Should implements
+    }
+
+    // var str = JSON.stringify(postData);
+    $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+  }
