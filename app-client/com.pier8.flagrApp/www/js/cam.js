@@ -105,6 +105,7 @@
         $("#body-loader").css("display","block");
         $("#body-list").css("display","none");
         $("#body-photo").css("display","none");
+
         break;
       }
     }
@@ -145,7 +146,9 @@
 
   function postPic(frm) {
       var url = "https://flagrapp-server.herokuapp.com/api/publish";
-      var data = '{ "media" : "'+$("#media").val()+'", "status" : "#Flagrapp '+$("input:text").val()+'" }';
+      var optionStatus = $("#status-tipo option:selected").val();
+      var data = '{ "media" : "'+$("#media").val()+'",'+
+                 ' "status" : "#Flagrapp '+$("input:text").val()+' '+optionStatus+'" }';
 
       $.ajax({url: url,
           dataType: "json",

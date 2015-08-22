@@ -77,36 +77,39 @@
           </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="icon_prefix" type="text" id="status" name="status">
+                  <input id="icon_prefix" type="text" id="status" name="status" style="width:80%;">
                   <label for="icon_prefix">O que esta acontecendo</label>
                 </div>
               </div>
             <div class="card-action">
-              <a class="btn-large waves-effect waves-light red white-text" id="btnCancelPhoto">
-                Cancelar</a>
-                &nbsp;
-              <button class="btn-large waves-effect waves-light blue" type="submit" name="action">
-                Postar <i class="material-icons">send</i>
-              </button>
+              <div class="input-field col s12" style="z-index:1;">
+                  <select name="status-tipo" id="status-tipo">
+                    <option value="" disabled selected>Tipo do Flagra</option>
+                    <option value="#desperdicioAgua">#desperdicioAgua</option>
+                    <option value="#vagaReservada">#vagaReservada</option>
+                    <option value="#violencia">#violencia</option>
+                    <option value="#cocoCachorro">#cocoCachorro</option>
+                    <option value="#acidente">#acidente</option>
+                    <option value="#transito">#transito</option>
+                  </select>
+                  <label>Materialize Select</label>
+              </div>
+                  <a class="botao btn-large waves-effect waves-light red white-text" id="btnCancelPhoto">
+                    Cancelar</a>
+                    &nbsp;
+                  <button class="botao btn-large waves-effect waves-light blue" type="submit" name="action">
+                      Postar <i class="material-icons">send</i>
+                  </button>
             </div>
-      </div>
+        </div>
+    </div>
     </form>
 </div>
 <!--********************************************** BODY PHOTO **********************************************-->
 
 <!--********************************************** PRE LOADER **********************************************-->
-<div class="cernter-align" id="body-loader">
-<div class="preloader-wrapper big active">
-  <div class="spinner-layer spinner-blue-only">
-    <div class="circle-clipper left">
-      <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-      <div class="circle"></div>
-    </div>
-  </div>
-</div>
+<div id="body-loader">
+    <img style="margin-top:50%; margin-left:40%" src="img/loader.gif" />
 </div>
 <!--********************************************** PRE LOADER **********************************************-->
 
