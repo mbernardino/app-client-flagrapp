@@ -40,6 +40,8 @@
           </a>
         </div>
 
+        <div id="list-place">
+        </div>
         <!--<button onclick="capturePhoto();">Capture Photo</button> <br>
         <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
         <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
@@ -66,54 +68,45 @@
   <form action="#">
       <div class="row">
         <div class="col s12 m7">
-          <div class="card large">
+          <div class="card">
             <div class="card-image">
               <img src="" id="smallImage">
               <input type="hidden" name="media" id="media" />
+              <span class="card-title">#Flagrapp</span>
             </div>
-            <div>
+          </div>
               <div class="row">
-                <h5>#Flagrapp</h5>
-                <div class="input-field">
-                  <input id="icon_prefix" type="text" id="status" class="validate"
-                         style="width:80%; height:auto;" name="status">
+                <div class="input-field col s6">
+                  <input id="icon_prefix" type="text" id="status" name="status">
                   <label for="icon_prefix">O que esta acontecendo</label>
                 </div>
               </div>
-                <!--<select name="status" id="status">
-                  <option value="" disabled selected>Tipo do Flagra</option>
-                  <option value="1">#FlagraDesperdicandoAgua</option>
-                  <option value="2">#FlagraEstacionandoMal</option>
-                  <option value="3">#FlagraMauTrato</option>
-                </select>-->
-            </div>
             <div class="card-action">
               <a class="btn-large waves-effect waves-light red white-text" id="btnCancelPhoto">
                 Cancelar</a>
+                &nbsp;
               <button class="btn-large waves-effect waves-light blue" type="submit" name="action">
-                Postar
+                Postar <i class="material-icons">send</i>
               </button>
             </div>
-          </div>
-        </div>
       </div>
     </form>
 </div>
 <!--********************************************** BODY PHOTO **********************************************-->
 
 <!--********************************************** PRE LOADER **********************************************-->
-<div calss="valign-wrapper" id="body-loader" style="display:none;">
-      <div class="preloader-wrapper big active valign">
-          <div class="spinner-layer spinner-red">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-      </div>
+<div class="cernter-align" id="body-loader">
+<div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-blue-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>
 </div>
 <!--********************************************** PRE LOADER **********************************************-->
 

@@ -20,7 +20,7 @@
       });
 
       $("form").submit(function(e){
-        postPic();
+        postPic($(this));
         e.preventDefault();
       });
       setRecentsList();
@@ -60,7 +60,7 @@
     //
     function capturePhoto() {
       // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 45,
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
         destinationType: destinationType.DATA_URL });
     }
 
@@ -122,26 +122,30 @@
         beforeSend:function(){changeDisplays('loader')},
         complete:function(){changeDisplays('list')},
         success: function (response) {
-          $.each(response.message, function(key, value){
-            var card = $("<div class=\"row\">"+
-             "<div class=\"col s12 m7\">"+
-             "<div class=\"card\">"+
-             "<div class=\"card-image\">"+
-             "<img src=\""+value.media+"\" style=\"width:100%; height:auto;\">"+
-             "<span class=\"card-title\">#"+value.text+"</span>"+
-             "</div></div></div></div>");
-            $("#body-list").append(card);
-          });
+          $("#list-place").html("");
+          if(response != null) {
+            $.each(response.message, function(key, value){
+              var card = $("<div class=\"row\">"+
+               "<div class=\"col s12 m7\">"+
+               "<div class=\"card\">"+
+               "<div class=\"card-image\">"+
+               "<img src=\""+value.media+"\" style=\"width:100%; height:auto;\">"+
+               "<span class=\"card-title\">"+value.text+"</span>"+
+               "</div></div></div></div>");
+              $("#list-place").append(card);
+            });
+          }
         },
         error: function (xhr, ajaxOptions, thrownError) {
           onFail('Network issue '+ xhr.status +' Error: ' + thrownError);
+          console.log('Network issue '+ xhr.status +' Error: ' + thrownError);
         }
       });
     }
 
-  function postPic() {
-      var url = "https://flagrapp-server.herokuapp.com/api/publish?status="+$("#status").val();
-      var data = JSON.stringify({media:$("#media").val()});
+  function postPic(frm) {
+      var url = "https://flagrapp-server.herokuapp.com/api/publish";
+      var data = '{ "media" : "'+$("#media").val()+'", "status" : "#Flagrapp '+$("input:text").val()+'" }';
 
       $.ajax({url: url,
           dataType: "json",
@@ -156,6 +160,7 @@
           },
           error: function (xhr, ajaxOptions, thrownError) {
             onFail('Network issue '+ xhr.status +' Error: ' + thrownError);
+            console.log('Network issue '+ xhr.status +' Error: ' + thrownError);
           }
         });
   }
