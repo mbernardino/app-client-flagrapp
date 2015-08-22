@@ -13,9 +13,15 @@
 
       $(".button-collapse").sideNav();
       $('select').material_select();
-      $("#btnCancelPhoto").click(function(){changeDisplays("list");});
-      $("#btnPostPhoto").click(function(){
-        Materialize.toast("Vou implementar esta function", 4000);
+
+      $("#btnCancelPhoto").click(function(e){
+        changeDisplays("list");
+        e.preventDefault();
+      });
+
+      $("form").submit(function(e){
+        postPic();
+        e.preventDefault();
       });
       setRecentsList();
     }
@@ -54,7 +60,7 @@
     //
     function capturePhoto() {
       // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 45,
         destinationType: destinationType.DATA_URL });
     }
 
@@ -106,50 +112,67 @@
     function setImageIntoForm(imageData) {
       var smallImage = document.getElementById('smallImage');
       smallImage.src = "data:image/jpeg;base64," + imageData;
+      $("#media").val(imageData);
     }
 
     function setRecentsList() {
-      alert('here');
-        $.ajax({url: "https://flagrapp-server.herokuapp.com/api/recents",
+      $.ajax({url: "https://flagrapp-server.herokuapp.com/api/recents",
+        dataType: "json",
+        async: true,
+        beforeSend:function(){changeDisplays('loader')},
+        complete:function(){changeDisplays('list')},
+        success: function (response) {
+          $.each(response.message, function(key, value){
+            var card = $("<div class=\"row\">"+
+             "<div class=\"col s12 m7\">"+
+             "<div class=\"card\">"+
+             "<div class=\"card-image\">"+
+             "<img src=\""+value.media+"\" style=\"width:100%; height:auto;\">"+
+             "<span class=\"card-title\">#"+value.text+"</span>"+
+             "</div></div></div></div>");
+            $("#body-list").append(card);
+          });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          onFail('Network issue '+ xhr.status +' Error: ' + thrownError);
+        }
+      });
+    }
+
+  function postPic() {
+      var url = "https://flagrapp-server.herokuapp.com/api/publish?status="+$("#status").val();
+      var data = JSON.stringify({media:$("#media").val()});
+
+      $.ajax({url: url,
           dataType: "json",
           async: true,
+          method: "POST",
+          contentType: "application/json",
+          data: data,
           beforeSend:function(){changeDisplays('loader')},
           complete:function(){changeDisplays('list')},
           success: function (response) {
-            $.each(response.message, function(key, value){
-                var card = $("<div class=\"row\">"+
-                             "<div class=\"col s12 m7\">"+
-                             "<div class=\"card\">"+
-                             "<div class=\"card-image\">"+
-                             "<img src=\""+value.media+"\" style=\"width:100%; height:auto;\">"+
-                             "<span class=\"card-title\">#"+value.text+"</span>"+
-                             "</div></div></div></div>");
-                $("#body-list").append(card);
-            });
+            setRecentsList();
           },
-          error: function (request, error) {
-            onFail('Network issue'+ error);
+          error: function (xhr, ajaxOptions, thrownError) {
+            onFail('Network issue '+ xhr.status +' Error: ' + thrownError);
           }
         });
-    }
-
-    function postPic() {
-      //Should implements
-    }
+  }
 
     // var str = JSON.stringify(postData);
     $.fn.serializeObject = function() {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
         if (o[this.name] !== undefined) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
+          if (!o[this.name].push) {
+            o[this.name] = [o[this.name]];
+          }
+          o[this.name].push(this.value || '');
         } else {
-            o[this.name] = this.value || '';
+          o[this.name] = this.value || '';
         }
-    });
-    return o;
-  }
+      });
+      return o;
+    }

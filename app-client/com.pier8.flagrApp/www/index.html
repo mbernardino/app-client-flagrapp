@@ -48,7 +48,7 @@
         <img style="display:none;" id="largeImage" src="" />-->
       
       <!-- CardExample -->
-      <div class="row">
+      <!--<div class="row">
         <div class="col s12 m7">
           <div class="card">
             <div class="card-image">
@@ -57,41 +57,53 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
 </div>
 <!--********************************************** BODY LIST **********************************************-->
 
 <!--********************************************** BODY PHOTO **********************************************-->
 <div calss="center-align" id="body-photo" style="display:none;">
+  <form action="#">
       <div class="row">
         <div class="col s12 m7">
           <div class="card large">
             <div class="card-image">
               <img src="" id="smallImage">
+              <input type="hidden" name="media" id="media" />
             </div>
             <div>
-              <div class="input-field col s12" style="z-index:9999px;">
-                <select>
-                  <option value="" disabled selected>Tipo do Flagra</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
+              <div class="row">
+                <h5>#Flagrapp</h5>
+                <div class="input-field">
+                  <input id="icon_prefix" type="text" id="status" class="validate"
+                         style="width:80%; height:auto;" name="status">
+                  <label for="icon_prefix">O que esta acontecendo</label>
+                </div>
               </div>
+                <!--<select name="status" id="status">
+                  <option value="" disabled selected>Tipo do Flagra</option>
+                  <option value="1">#FlagraDesperdicandoAgua</option>
+                  <option value="2">#FlagraEstacionandoMal</option>
+                  <option value="3">#FlagraMauTrato</option>
+                </select>-->
             </div>
             <div class="card-action">
-              <a class="waves-effect waves-light btn" id="btnCancelPhoto">Cancelar</a>
-              <a class="waves-effect waves-light btn" id="btnPostPhoto">Postar</a>
+              <a class="btn-large waves-effect waves-light red white-text" id="btnCancelPhoto">
+                Cancelar</a>
+              <button class="btn-large waves-effect waves-light blue" type="submit" name="action">
+                Postar
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </form>
 </div>
 <!--********************************************** BODY PHOTO **********************************************-->
 
 <!--********************************************** PRE LOADER **********************************************-->
-<div calss="center-align" id="body-loader" style="display:none;">
-      <div class="preloader-wrapper big active">
+<div calss="valign-wrapper" id="body-loader" style="display:none;">
+      <div class="preloader-wrapper big active valign">
           <div class="spinner-layer spinner-red">
               <div class="circle-clipper left">
                 <div class="circle"></div>
